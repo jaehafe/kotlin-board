@@ -8,6 +8,5 @@ class KotlinBoardApplicationTests {
 
     @Test
     fun contextLoads() {
-        SampleTest()
     }
 }
