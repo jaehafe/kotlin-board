@@ -1,8 +1,8 @@
 package com.kt.kotlinboard.controller
 
-import com.kt.kotlinboard.controller.dto.PostCreateRequest
-import com.kt.kotlinboard.controller.dto.PostDetailResponse
-import com.kt.kotlinboard.controller.dto.PostUpdateRequest
+import com.kt.kotlinboard.controller.dto.*
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -51,5 +51,13 @@ class PostController {
             "createdBy",
             LocalDateTime.now().toString(),
         )
+    }
+
+    @GetMapping("/posts")
+    fun getPosts(
+        pageable: Pageable,
+        postSearchRequest: PostSearchRequest,
+    ): Page<PostSummaryResponse> {
+        return Page.empty()
     }
 }
