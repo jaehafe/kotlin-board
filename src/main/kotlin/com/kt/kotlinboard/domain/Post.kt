@@ -1,7 +1,7 @@
 package com.kt.kotlinboard.domain
 
 import com.kt.kotlinboard.exception.PostNotUpdatableException
-import com.kt.kotlinboard.service.dto.request.PostUpdateRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostUpdateRequestDto
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

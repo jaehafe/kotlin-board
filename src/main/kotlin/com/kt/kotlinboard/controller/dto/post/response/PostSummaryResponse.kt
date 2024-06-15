@@ -1,6 +1,6 @@
 package com.kt.kotlinboard.controller.dto.post.response
 
-import com.kt.kotlinboard.service.dto.response.PostSummaryResponseDto
+import com.kt.kotlinboard.service.dto.post.response.PostSummaryResponseDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 

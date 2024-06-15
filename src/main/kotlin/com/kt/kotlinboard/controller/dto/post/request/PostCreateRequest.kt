@@ -1,6 +1,6 @@
 package com.kt.kotlinboard.controller.dto.post.request
 
-import com.kt.kotlinboard.service.dto.request.PostCreateRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostCreateRequestDto
 
 data class PostCreateRequest(
     val title: String,

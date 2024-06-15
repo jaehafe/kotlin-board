@@ -1,4 +1,4 @@
-package com.kt.kotlinboard.service.dto.response
+package com.kt.kotlinboard.service.dto.post.response
 
 import com.kt.kotlinboard.domain.Post
 import org.springframework.data.domain.Page

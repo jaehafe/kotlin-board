@@ -2,7 +2,7 @@ package com.kt.kotlinboard.repository
 
 import com.kt.kotlinboard.domain.Post
 import com.kt.kotlinboard.domain.QPost.post
-import com.kt.kotlinboard.service.dto.request.PostSearchRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostSearchRequestDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable

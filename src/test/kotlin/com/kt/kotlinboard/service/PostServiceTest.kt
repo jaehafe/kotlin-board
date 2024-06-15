@@ -5,9 +5,9 @@ import com.kt.kotlinboard.exception.PostNotDeletableException
 import com.kt.kotlinboard.exception.PostNotFoundException
 import com.kt.kotlinboard.exception.PostNotUpdatableException
 import com.kt.kotlinboard.repository.PostRepository
-import com.kt.kotlinboard.service.dto.request.PostCreateRequestDto
-import com.kt.kotlinboard.service.dto.request.PostSearchRequestDto
-import com.kt.kotlinboard.service.dto.request.PostUpdateRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostCreateRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostSearchRequestDto
+import com.kt.kotlinboard.service.dto.post.request.PostUpdateRequestDto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.longs.shouldBeGreaterThan

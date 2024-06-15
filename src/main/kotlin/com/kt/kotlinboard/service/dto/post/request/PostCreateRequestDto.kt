@@ -1,4 +1,4 @@
-package com.kt.kotlinboard.service.dto.request
+package com.kt.kotlinboard.service.dto.post.request
 
 import com.kt.kotlinboard.domain.Post
 

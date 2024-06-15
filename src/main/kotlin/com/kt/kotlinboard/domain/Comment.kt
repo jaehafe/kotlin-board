@@ -1,5 +1,7 @@
 package com.kt.kotlinboard.domain
 
+import com.kt.kotlinboard.exception.CommentNotUpdatableException
+import com.kt.kotlinboard.service.dto.comment.request.CommentUpdateRequestDto
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
@@ -12,7 +14,7 @@ class Comment(
     content: String,
     post: Post,
     createdBy: String,
-): BaseEntity(createdBy = createdBy) {
+) : BaseEntity(createdBy = createdBy) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +26,13 @@ class Comment(
     @ManyToOne(fetch = FetchType.LAZY)
     var post: Post = post
         protected set
+
+    fun update(updateRequestDto: CommentUpdateRequestDto) {
+        if(updateRequestDto.updatedBy != this.createdBy) {
+            throw CommentNotUpdatableException()
+        }
+        this.content = updateRequestDto.content
+        super.updatedBy = updateRequestDto.updatedBy
+
+    }
 }
