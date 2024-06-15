@@ -56,7 +56,7 @@ class PostController(
             "title",
             "content",
             "createdBy",
-            LocalDateTime.now().toString(),
+            LocalDateTime.now().toString()
         )
     }
 

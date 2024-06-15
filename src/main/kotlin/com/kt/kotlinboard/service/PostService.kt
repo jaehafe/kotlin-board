@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class PostService(
-    private val postRepository: PostRepository
+    private val postRepository: PostRepository,
 ) {
     @Transactional
     fun createPost(requestDto: PostCreateRequestDto): Long {
@@ -34,5 +34,4 @@ class PostService(
         postRepository.delete(post)
         return id
     }
-
 }
