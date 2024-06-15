@@ -1,5 +1,7 @@
 package com.kt.kotlinboard.domain
 
+import com.kt.kotlinboard.exception.PostNotUpdatableException
+import com.kt.kotlinboard.service.dto.request.PostUpdateRequestDto
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -19,4 +21,13 @@ class Post(
         protected set
     var content: String = content
         protected set
+
+    fun update(postUpdateRequestDto: PostUpdateRequestDto) {
+        if (postUpdateRequestDto.updatedBy != this.createdBy) {
+            throw PostNotUpdatableException()
+        }
+        this.title = postUpdateRequestDto.title
+        this.content = postUpdateRequestDto.content
+        super.update(postUpdateRequestDto.updatedBy)
+    }
 }

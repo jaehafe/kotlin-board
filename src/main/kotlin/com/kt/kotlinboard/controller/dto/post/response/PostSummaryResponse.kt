@@ -1,4 +1,4 @@
-package com.kt.kotlinboard.controller.dto
+package com.kt.kotlinboard.controller.dto.post.response
 
 data class PostSummaryResponse(
     val id: Long,

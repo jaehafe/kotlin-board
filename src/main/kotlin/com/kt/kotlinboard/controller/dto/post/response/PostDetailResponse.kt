@@ -1,6 +1,4 @@
-package com.kt.kotlinboard.controller.dto
-
-import java.time.LocalDateTime
+package com.kt.kotlinboard.controller.dto.post.response
 
 data class PostDetailResponse(
     val id: Long,
