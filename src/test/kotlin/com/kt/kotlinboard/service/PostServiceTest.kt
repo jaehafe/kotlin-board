@@ -1,9 +1,11 @@
 package com.kt.kotlinboard.service
 
+import com.kt.kotlinboard.domain.Comment
 import com.kt.kotlinboard.domain.Post
 import com.kt.kotlinboard.exception.PostNotDeletableException
 import com.kt.kotlinboard.exception.PostNotFoundException
 import com.kt.kotlinboard.exception.PostNotUpdatableException
+import com.kt.kotlinboard.repository.CommentRepository
 import com.kt.kotlinboard.repository.PostRepository
 import com.kt.kotlinboard.service.dto.post.request.PostCreateRequestDto
 import com.kt.kotlinboard.service.dto.post.request.PostSearchRequestDto
@@ -22,6 +24,7 @@ import org.springframework.data.repository.findByIdOrNull
 class PostServiceTest(
     private val postService: PostService,
     private val postRepository: PostRepository,
+    private val commentRepository: CommentRepository,
 ) : BehaviorSpec({
     beforeSpec {
         postRepository.saveAll(
@@ -144,6 +147,19 @@ class PostServiceTest(
                     postService.getPost(9999L)
                 }
             }
+        }
+        When("댓글 추가시") {
+            commentRepository.save(Comment(content = "comment1", post = saved, createdBy = "댓글 작성자"))
+            commentRepository.save(Comment(content = "comment2", post = saved, createdBy = "댓글 작성자"))
+            commentRepository.save(Comment(content = "comment3", post = saved, createdBy = "댓글 작성자"))
+            val post = postService.getPost(saved.id)
+            then("댓글이 함께 조회됨을 확인한다") {
+                post.comments.size shouldBe 3
+                post.comments[0].content shouldBe "comment1"
+                post.comments[1].content shouldBe "comment2"
+                post.comments[2].content shouldBe "comment3"
+            }
+
         }
     }
 
