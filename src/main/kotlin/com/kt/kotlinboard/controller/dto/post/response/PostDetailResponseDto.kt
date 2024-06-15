@@ -1,6 +1,8 @@
 package com.kt.kotlinboard.controller.dto.post.response
 
-data class PostDetailResponse(
+import com.kt.kotlinboard.domain.Post
+
+data class PostDetailResponseDto(
     val id: Long,
     val title: String,
     val content: String,
@@ -8,10 +10,10 @@ data class PostDetailResponse(
     val createdAt: String,
 )
 
-fun PostDetailResponseDto.toResponse() = PostDetailResponse(
+fun Post.toDetailResponseDto() = PostDetailResponseDto(
     id = id,
     title = title,
     content = content,
     createdBy = createdBy,
-    createdAt = createdAt,
+    createdAt = createdAt.toString(),
 )

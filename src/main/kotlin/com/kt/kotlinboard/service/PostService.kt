@@ -1,11 +1,18 @@
 package com.kt.kotlinboard.service
 
+import com.kt.kotlinboard.controller.dto.post.response.PostDetailResponseDto
+import com.kt.kotlinboard.controller.dto.post.response.toDetailResponseDto
 import com.kt.kotlinboard.exception.PostNotDeletableException
 import com.kt.kotlinboard.exception.PostNotFoundException
 import com.kt.kotlinboard.repository.PostRepository
 import com.kt.kotlinboard.service.dto.request.PostCreateRequestDto
+import com.kt.kotlinboard.service.dto.request.PostSearchRequestDto
 import com.kt.kotlinboard.service.dto.request.PostUpdateRequestDto
 import com.kt.kotlinboard.service.dto.request.toEntity
+import com.kt.kotlinboard.service.dto.response.PostSummaryResponseDto
+import com.kt.kotlinboard.service.dto.response.toSummaryResponseDto
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -33,5 +40,13 @@ class PostService(
         if (post.createdBy != deletedBy) throw PostNotDeletableException()
         postRepository.delete(post)
         return id
+    }
+
+    fun getPost(id: Long): PostDetailResponseDto {
+        return postRepository.findByIdOrNull(id)?.toDetailResponseDto() ?: throw PostNotFoundException()
+    }
+
+    fun findPageBy(pageRequest: Pageable, postSearchRequestDto: PostSearchRequestDto): Page<PostSummaryResponseDto> {
+        return postRepository.findPageBy(pageRequest, postSearchRequestDto).toSummaryResponseDto()
     }
 }
