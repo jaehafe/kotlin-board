@@ -42,6 +42,16 @@ class Post(
         }
         this.title = postUpdateRequestDto.title
         this.content = postUpdateRequestDto.content
+        replaceTags(postUpdateRequestDto.tags)
         super.update(postUpdateRequestDto.updatedBy)
+    }
+
+    private fun replaceTags(tags: List<String>) {
+        if (this.tags.map { it.name } != tags) {
+            this.tags.clear()
+            this.tags.addAll(tags.map { tagName ->
+                Tag(tagName, this, createdBy)
+            })
+        }
     }
 }
