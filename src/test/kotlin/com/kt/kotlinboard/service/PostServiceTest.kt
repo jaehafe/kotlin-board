@@ -190,6 +190,9 @@ class PostServiceTest(
                 Tag(name = "tags3", post = saved, createdBy = "adam"),
             )
         )
+        likeService.createLike(saved.id, "harris")
+        likeService.createLike(saved.id, "harris1")
+        likeService.createLike(saved.id, "harris2")
         When("정상 조회시") {
             val post = postService.getPost(saved.id)
             then("게시글의 내용이 정상적으로 반환됨을 확인한다") {
@@ -222,6 +225,9 @@ class PostServiceTest(
                 post.tags[0] shouldBe "tags1"
                 post.tags[1] shouldBe "tags2"
                 post.tags[2] shouldBe "tags3"
+            }
+            then("좋아요 개수가 조회됨을 확인한다") {
+                post.likeCount shouldBe 3
             }
         }
     }
