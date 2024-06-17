@@ -3,6 +3,7 @@ package com.kt.kotlinboard.repository
 import com.kt.kotlinboard.domain.Tag
 import org.springframework.data.domain.Page
 import com.kt.kotlinboard.domain.QTag.tag
+import com.kt.kotlinboard.domain.QPost.post
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
@@ -20,7 +21,7 @@ class CustomTagRepositoryImpl : CustomTagRepository, QuerydslRepositorySupport(T
 
     override fun findPageBy(pageRequest: Pageable, tagName: String): Page<Tag> {
         return from(tag)
-            .join(tag.post).fetchJoin()
+            .join(tag.post, post).fetchJoin()
             .where(tag.name.eq(tagName))
             .orderBy(tag.post.createdAt.desc())
             .offset(pageRequest.offset)
