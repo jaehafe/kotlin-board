@@ -5,12 +5,14 @@ import com.kt.kotlinboard.controller.dto.post.response.toDetailResponseDto
 import com.kt.kotlinboard.exception.PostNotDeletableException
 import com.kt.kotlinboard.exception.PostNotFoundException
 import com.kt.kotlinboard.repository.PostRepository
+import com.kt.kotlinboard.repository.TagRepository
 import com.kt.kotlinboard.service.dto.post.request.PostCreateRequestDto
 import com.kt.kotlinboard.service.dto.post.request.PostSearchRequestDto
 import com.kt.kotlinboard.service.dto.post.request.PostUpdateRequestDto
 import com.kt.kotlinboard.service.dto.post.request.toEntity
 import com.kt.kotlinboard.service.dto.post.response.PostSummaryResponseDto
 import com.kt.kotlinboard.service.dto.post.response.toSummaryResponseDto
+import com.kt.kotlinboard.service.dto.tag.request.toSummaryResponseDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional
 class PostService(
     private val postRepository: PostRepository,
     private val likeService: LikeService,
+    private val tagRepository: TagRepository,
 ) {
     @Transactional
     fun createPost(requestDto: PostCreateRequestDto): Long {
@@ -49,6 +52,9 @@ class PostService(
     }
 
     fun findPageBy(pageRequest: Pageable, postSearchRequestDto: PostSearchRequestDto): Page<PostSummaryResponseDto> {
+        postSearchRequestDto.tag?.let {
+            return tagRepository.findPageBy(pageRequest, it).toSummaryResponseDto(likeService::countLike)
+        }
         return postRepository.findPageBy(pageRequest, postSearchRequestDto)
             .toSummaryResponseDto(likeService::countLike)
     }
